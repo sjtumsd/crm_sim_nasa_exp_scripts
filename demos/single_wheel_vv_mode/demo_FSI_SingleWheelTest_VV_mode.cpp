@@ -1,15 +1,6 @@
 // =============================================================================
-// PROJECT CHRONO - http://projectchrono.org
-//
-// Copyright (c) 2014 projectchrono.org
-// All rights reserved.
-//
-// Use of this source code is governed by a BSD-style license that can be found
-// in the LICENSE file at the top level of the distribution and at
-// http://projectchrono.org/license-chrono.txt.
-//
-// =============================================================================
-// Author: Wei Hu, Radu Serban
+// Author: Wei Hu
+// Email:  weihu@sjtu.edu.cn
 // =============================================================================
 
 #include <cassert>
@@ -40,6 +31,9 @@ using namespace chrono;
 using namespace chrono::fsi;
 using namespace chrono::geometry;
 
+// Your work directory
+std::string work_dir = "home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts";
+
 // Physical properties of terrain particles
 double iniSpacing;
 double kernelLength;
@@ -62,7 +56,7 @@ double wheel_slip = 0.0;
 double wheel_vel = 0.2;
 double wheel_AngVel = 0.8;
 double total_mass = 17.5;
-std::string wheel_obj = "robot/viper/obj/viper_wheel.obj";
+std::string wheel_obj = work_dir + "/obj/viper_wheel.obj";
 
 // Initial Position of wheel
 ChVector<> wheel_IniPos(-bxDim / 2 + wheel_radius * 2.0, 0.0, wheel_radius + bzDim + 0.01);
@@ -81,7 +75,7 @@ bool output = true;
 int out_fps = 1;
 
 // Output directories and settings
-std::string out_dir = "/root/sbel/outputs/FSI_Single_Wheel_Test_VV_mode_slip";
+std::string out_dir = work_dir + "/outputs";
 
 // Enable/disable run-time visualization (if Chrono::OpenGL is available)
 bool render = true;
@@ -271,13 +265,38 @@ int main(int argc, char* argv[]) {
     sysFSI.SetVerbose(verbose_fsi);
 
     // Use JSON file to set the FSI parameters
-    std::string inputJson = "/root/sbel/json/demo_FSI_SingleWheelTest_VV_mode.json";
-    if (argc == 4) {
+    std::string inputJson = work_dir + "/json";
+    if (argc == 7) {
         total_mass = std::stod(argv[1]);
         wheel_slip = std::stod(argv[2]);
         wheel_AngVel = wheel_vel / (wheel_radius * (1.0 - wheel_slip));
-        out_dir = out_dir + std::to_string(std::stoi(argv[3])) + "/";;
-    } else if (argc != 4) {
+        // out_dir = out_dir + std::to_string(std::stoi(argv[3])) + "/";
+        if (std::stoi(argv[4]) == 1){
+            inputJson = inputJson + "/GRC1";
+            out_dir = out_dir + "/GRC1";
+        } else if (std::stoi(argv[4]) == 3){
+            inputJson = inputJson + "/GRC3";
+            out_dir = out_dir + "/GRC3";
+        }
+        if (std::stoi(argv[5]) == 1){
+            inputJson = inputJson + "/Earth";
+            out_dir = out_dir + "/Earth";
+        } else if (std::stoi(argv[5]) == 3){
+            inputJson = inputJson + "/Moon";
+            out_dir = out_dir + "/Moon";
+        }
+        if (std::stoi(argv[6]) == 1){
+            inputJson = inputJson + "/1.json";
+            out_dir = out_dir + "/soil1_";
+        } else if (std::stoi(argv[6]) == 2){
+            inputJson = inputJson + "/2.json";
+            out_dir = out_dir + "/soil2_";
+        } else if (std::stoi(argv[6]) == 3){
+            inputJson = inputJson + "/3.json";
+            out_dir = out_dir + "/soil3_";
+        }
+        out_dir = out_dir + "slip_" + std::to_string(std::stoi(argv[3])) + "/";
+    } else if (argc != 7) {
         std::cout << "usage: ./demo_FSI_SingleWheelTest_VV_mode <total_mass> <wheel_slip>" << std::endl;
         std::cout << "or to use default input parameters ./demo_FSI_SingleWheelTest_VV_mode " << std::endl;
         return 1;

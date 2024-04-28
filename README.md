@@ -1,4 +1,4 @@
-# workshop_demo
+# Scripts and instruction about how to reproduce the results in the paper
 The Chrono demos are containerized with Docker. Here are some instructions how to set up container on your machine so that you can successfully run the demo.
 
 ## Building an image
