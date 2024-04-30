@@ -1,7 +1,5 @@
-# Scripts and instruction about how to reproduce the results in the paper
-
-/home/weihu/research/00_CRM_NASA_SIM/
-
+# Scripts and Instructions
+Clone the scripts and follow the below instructions to reproduce the results we published in the paper.
 
 
 ## Step 1 - Clone Chrono and scripts for the paper, then build Chrono software
@@ -25,9 +23,9 @@ Make some necessary changes to the chrono source files by replcing them with the
 
 Make a build directory to build chrono software:
 
-```mkdir build```
+```mkdir chrono_build```
 
-```cd build```
+```cd chrono_build```
 
 Build chrono in this directody with ```FSI Module``` and ```Vehicle Module``` enabled
 
