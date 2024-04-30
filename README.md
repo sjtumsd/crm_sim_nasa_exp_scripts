@@ -47,6 +47,8 @@ Build the simulation
 
 Run the simulation
 
+```sudo chmod +x runSimulation.sh```
+
 ```./runSimulation.sh```
 
 
@@ -65,6 +67,8 @@ Build the simulation
 
 Run the simulation
 
+```sudo chmod +x runSimulation.sh```
+
 ```./runSimulation.sh```
 
 ## Step 4 - Build and run the full Viper rover simulation
@@ -81,5 +85,7 @@ Build the simulation
 ```make```
 
 Run the simulation
+
+```sudo chmod +x runSimulation.sh```
 
 ```./runSimulation.sh```
