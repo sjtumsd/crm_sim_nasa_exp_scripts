@@ -1,90 +1,85 @@
 # Scripts and instruction about how to reproduce the results in the paper
-The Chrono demos are containerized with Docker. Here are some instructions how to set up container on your machine so that you can successfully run the demo.
 
-## Building an image
-### Method 1 ---- Build from scratch 
-Open a terminal in your machine then run 
-
-```git clone https://github.com/uwsbel/workshop_demo.git && cd workshop_demo```
-
-Once getting into folder, running the following to build docker image from Dockerfile:
-
-``` docker build -t <img_name> . ```
-
-Notice that you can put a tag name for the image you build by using flag -t. For example,
-
-``` docker build -t uwsbel/demo . ```
-
-builds an image named uwsbel/demo.
+/home/weihu/research/00_CRM_NASA_SIM/
 
 
-### Method 2 ---- Pulling Our Docker Image
 
-Pulling the Docker image by running:
+## Step 1 - Clone Chrono and scripts for the paper, then build Chrono software
+Creat a work directory in your home directory like below and go to this folder: 
 
-```docker pull uwsbel/demo```
+```/home/weihu/research/00_CRM_NASA_SIM/```
 
-## Running a container based on an image
+Go to this work directory, clone the chrono repository and checkout to release 8.0 version: 
 
-After building the image using either method, create and get into a container using the command:
+```git clone https://github.com/projectchrono/chrono.git --recursive -b release/8.0```
 
-```docker run -it --gpus all -v <dir_to_store_data>:/root/sbel/outputs -v <dir_to_json_inputs>:/root/sbel/json uwsbel/demo ```
+Clone the scripts repository for the paper: 
 
-Note: 
-- ```<dir_to_store_data>``` is the host machine directory where you want to store the output data from the demos. 
-- ```<dir_to_json_inputs>``` is the host machine directory of json inputs. 
-- ```/root/sbel/outputs``` is the output directory in the container.
-- ```/root/sbel/json``` is the json input directory in the container.
+```git clone https://github.com/sjtumsd/crm_sim_nasa_exp_scripts.git```
 
-```<dir_to_store_data>``` and ```<dir_to_json_inputs>``` depends on your operating system and work directory.
+Make some necessary changes to the chrono source files by replcing them with the provided files : 
 
-Windows user will have something like:```C:\Users\SBEL\demo_output\``` and ``` C:\Users\SBEL\workshop_demo\json```.
+```cp crm_sim_nasa_exp_scripts/chrono_source_files/Ch* chrono/src/chrono_fsi/```
 
-Linux user will have something like: ```/home/harry/workshop_demo/outputs/``` and ```/home/harry/workshop_demo/json/```
+```cp crm_sim_nasa_exp_scripts/chrono_source_files/Viper.cpp chrono/src/chrono_models/robot/viper/```
 
-## Run the demo
-Single wheel test under VV mode
+Make a build directory to build chrono software:
 
-```./demo_FSI_SingleWheelTest_VV_mode 17.5 0.3 3```
+```mkdir build```
 
-- 17.5 is the mass of the wheel
-- 0.3 is slip ratio that would like to enforce
-- 3 is just an ID for this slip
+```cd build```
 
-Sinle wheel test under real slope mode
+Build chrono in this directody with ```FSI Module``` and ```Vehicle Module``` enabled
 
-```./demo_FSI_SingleWheelTest_RealSlope_mode 17.5 15 0.8```
 
-- 17.5 is the mass of the wheel
-- 15 is the slope angle of the terrain
-- 0.8 is the wheel angular velocity
+## Step 2 - Build and run the single wheel simulation with VV-mode
+Go to the single wheel VV-mode scripts folder 
 
-Full VIPER rover under real slope
+```cd crm_sim_nasa_exp_scripts\demos\single_wheel_vv_mode```
 
-```./demo_ROBOT_Viper_RealSlope 73.0 15 0.8```
+Configure the single wheel simulation 
 
-- 73.0 is the mass of the rover
-- 15 is the slope angle of the terrain
-- 0.8 is the wheel angular velocity
+```cmake . -DCMAKE_BUILD_TYPE=Release -DChrono_DIR=/home/weihu/research/00_CRM_NASA_SIM/chrono_build/cmake```
 
-Curiosity rover on uphill and downhill
+Build the simulation
 
-```./demo_ROBOT_Curiosity_Uphill 200.0 1.0 1```
+```make```
 
-- 200.0 is the mass of the rover
-- 1.0 is the height of the terrain
-- 1 is just an ID for this simulation
+Run the simulaiton
 
-## Render the VIPER rover results using Blender
-- Go to one of the full VIPER rover result folder, e.g /FSI_Viper_RealSlope_SlopeAngle_15
-- Copy the script "blender_viper_render.py" and the obj file folder "obj_for_render" to the above result folder
-- Render an image using below command (7 is the frame number of the output image)
+```./runSimulation.sh```
 
-```blender --background --python ./blender_viper_render.py 7```
 
-## Render the Curiosity rover results using Blender
-- Go to one of the Curiosity rover result folder, e.g /FSI_Curiosity_Uphill_1
-- Copy the script "blender_curiosity_render.py" and the obj file folder "obj_for_render" to the above result folder
-- Render an image using below command (15 is the frame number of the output image)
+## Step 3 - Build and run the single wheel simulation with Real slope-mode
+Go to the single wheel Real slope-mode scripts folder 
 
-```blender --background --python ./blender_curiosity_render.py 15```
+```cd crm_sim_nasa_exp_scripts\demos\single_wheel_real_slope_mode```
+
+Configure the single wheel simulation 
+
+```cmake . -DCMAKE_BUILD_TYPE=Release -DChrono_DIR=/home/weihu/research/00_CRM_NASA_SIM/chrono_build/cmake```
+
+Build the simulation
+
+```make```
+
+Run the simulaiton
+
+```./runSimulation.sh```
+
+## Step 4 - Build and run the full Viper rover simulation
+Go to the full Viper rover scripts folder 
+
+```cd crm_sim_nasa_exp_scripts\demos\viper_real_slope```
+
+Configure the full Viper rover simulation 
+
+```cmake . -DCMAKE_BUILD_TYPE=Release -DChrono_DIR=/home/weihu/research/00_CRM_NASA_SIM/chrono_build/cmake```
+
+Build the simulation
+
+```make```
+
+Run the simulaiton
+
+```./runSimulation.sh```
