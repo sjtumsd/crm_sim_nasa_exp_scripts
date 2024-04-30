@@ -1,6 +1,6 @@
 import math
 import numpy
-from math import atan
+from math import tan
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -15,7 +15,7 @@ line_label=[r'VV mode, $\varphi=37.8,\rho=1627$',
             r'VV mode, $\varphi=42.0,\rho=1734$', 
             r'VV mode, $\varphi=47.8,\rho=1839$']
 title_name="Single Wheel Simulation, m=17.5(kg), GRC3"
-fig_name="Single_Wheel_17_5kg_GRC3_VV_Mode_SlopeVsSlip.png"
+fig_name="Single_Wheel_17_5kg_GRC3_VV_Mode_DbpVsSlip.png"
 
 plt.figure(figsize = [10, 6])
 font = {'weight': 'bold', 'size': 14}
@@ -41,6 +41,9 @@ experimental1=numpy.array([
 70.10371495440944, 29.748231234112183,
 80.16613210257583, 31.336970273308133,
 80.08992101668545, 33.60977773446753])
+
+for n in range(18):
+    experimental1[2*n+1] = tan(experimental1[2*n+1] * math.pi / 180.0) * 17.5 * 9.81
 
 # MGRU3 2021 SLOPElab Tests, GRC1
 experimental2=numpy.array([
@@ -71,7 +74,7 @@ l1=plt.legend([p1],["TREC Nominal Tests, GRC3"], loc='lower right',fontsize=14)
 
 for k in range(3):
     slip=[]
-    slope=[]
+    dbp=[]
     for i in range(9):
         if i%1==0:
             file=open(result_name[k] + str(k+1) + "_slip" + str(i) + "/results.txt","r")
@@ -97,10 +100,9 @@ for k in range(3):
                 numnum+=1
 
             slip.append(i/10.0)
-            slope.append(atan(sumsum/numnum/(17.5*9.81))*180/math.pi)
+            dbp.append(sumsum/numnum)
 
-    plt.plot(slip,slope,linestyle=line_style[k],marker=marker_s[k],markersize=14,label=line_label[k],linewidth=3)
-
+    plt.plot(slip,dbp,linestyle=line_style[k],marker=marker_s[k],markersize=14,label=line_label[k],linewidth=3)
                 
 plt.grid(linestyle='--')
 l2=plt.legend(loc='upper left',fontsize=14,ncol=1)
@@ -110,9 +112,9 @@ plt.gca().add_artist(l1)
 ax1=plt.gca()
 # ax1.set_title(title_name,fontsize=14,weight='bold')
 ax1.set_xlabel('Slip',fontsize=14,weight='bold')
-ax1.set_ylabel('Slope (deg)',fontsize=14,weight='bold')
+ax1.set_ylabel('DBP (N)',fontsize=14,weight='bold')
 ax1.set_xlim([-0.1,1.0])
-ax1.set_ylim([-20,60])
+ax1.set_ylim([-50,200])
 ax1.tick_params(axis='both',direction='in')
 
 for axis in ['top','bottom','left','right']:

@@ -29,7 +29,7 @@ Create a directory to build Chrono software:
 
 ```cd chrono_build```
 
-Build chrono in this directody with ```FSI MODULE``` ON, ```VEHICLE MODULE``` ON, and ```USE_FSI_DOUBLE``` OFF
+Build Chrono in this directody with ```FSI MODULE``` ON, ```VEHICLE MODULE``` ON, and ```USE_FSI_DOUBLE``` OFF
 
 
 ## Step 2 - Build and run the single wheel simulation with VV-mode
