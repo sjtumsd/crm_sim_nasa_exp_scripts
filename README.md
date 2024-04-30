@@ -1,6 +1,8 @@
 # Scripts and Instructions
 Clone the scripts and follow the below instructions to reproduce the results we published in the paper.
 
+PS: We ran simulations and genereated all the results on Ubuntu 20.04 with CUDA 11.8 and GCC 9.3.0.
+
 
 ## Step 1 - Clone Chrono and scripts for the paper, then build Chrono software
 Creat a work directory in your home directory like below and go to this folder: 
@@ -15,7 +17,7 @@ Clone the scripts repository for the paper:
 
 ```git clone https://github.com/sjtumsd/crm_sim_nasa_exp_scripts.git```
 
-Make some necessary changes to the chrono source files by replcing them with the provided files : 
+Make some necessary changes to the chrono source files by replacing them with the provided files : 
 
 ```cp crm_sim_nasa_exp_scripts/chrono_source_files/Ch* chrono/src/chrono_fsi/```
 
@@ -43,7 +45,7 @@ Build the simulation
 
 ```make```
 
-Run the simulaiton
+Run the simulation
 
 ```./runSimulation.sh```
 
@@ -61,7 +63,7 @@ Build the simulation
 
 ```make```
 
-Run the simulaiton
+Run the simulation
 
 ```./runSimulation.sh```
 
@@ -78,6 +80,6 @@ Build the simulation
 
 ```make```
 
-Run the simulaiton
+Run the simulation
 
 ```./runSimulation.sh```
