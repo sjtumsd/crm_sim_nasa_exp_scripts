@@ -9,7 +9,7 @@ Creat a work directory in your home directory like below and go to this folder:
 
 ```/home/weihu/research/00_CRM_NASA_SIM/```
 
-Go to this work directory, clone the chrono repository and checkout to release 8.0 version: 
+Go to this work directory, clone the Chrono repository and checkout to release 8.0 version: 
 
 ```git clone https://github.com/projectchrono/chrono.git --recursive -b release/8.0```
 
@@ -17,19 +17,19 @@ Clone the scripts repository for the paper:
 
 ```git clone https://github.com/sjtumsd/crm_sim_nasa_exp_scripts.git```
 
-Make some necessary changes to the chrono source files by replacing them with the provided files : 
+Make some necessary changes to the Chrono source files by replacing them with the provided files : 
 
 ```cp crm_sim_nasa_exp_scripts/chrono_source_files/Ch* chrono/src/chrono_fsi/```
 
 ```cp crm_sim_nasa_exp_scripts/chrono_source_files/Viper.cpp chrono/src/chrono_models/robot/viper/```
 
-Make a build directory to build chrono software:
+Create a directory to build Chrono software:
 
 ```mkdir chrono_build```
 
 ```cd chrono_build```
 
-Build chrono in this directody with ```FSI Module``` and ```Vehicle Module``` enabled
+Build chrono in this directody with ```FSI MODULE``` ON, ```VEHICLE MODULE``` ON, and ```USE_FSI_DOUBLE``` OFF
 
 
 ## Step 2 - Build and run the single wheel simulation with VV-mode
