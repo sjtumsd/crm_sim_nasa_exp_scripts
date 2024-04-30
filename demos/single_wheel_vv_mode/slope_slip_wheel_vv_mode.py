@@ -1,8 +1,3 @@
-# =============================================================================
-# Author: Wei Hu
-# Email:  weihu@sjtu.edu.cn
-# =============================================================================
-
 import math
 import numpy
 from math import atan
@@ -13,9 +8,12 @@ line_style=['--','-.',':',':','--','-.','-',':','--','-.','-',':']
 marker_s=['o','D','s','^','v','p','D','p','1','<','>','d']
 line_color=['b','g','c','c','m','y','k','b','g','r','c','m']
 
-result_name = "FSI_Single_Wheel_Test_VV_mode"
-line_label  = r'VV mode, $\varphi=42.0,\rho=1734$'
-
+result_name=["outputs/GRC3/Earth/soil", 
+             "outputs/GRC3/Earth/soil", 
+             "outputs/GRC3/Earth/soil"]
+line_label=[r'VV mode, $\varphi=37.8,\rho=1627$', 
+            r'VV mode, $\varphi=42.0,\rho=1734$', 
+            r'VV mode, $\varphi=47.8,\rho=1839$']
 title_name="Single Wheel Simulation, m=17.5(kg), GRC3"
 fig_name="Single_Wheel_17_5kg_GRC3_VV_Mode.png"
 
@@ -71,12 +69,12 @@ p1,=plt.plot(experimental1[::2]/100,experimental1[1::2],color='k',linestyle='--'
 l1=plt.legend([p1],["TREC Nominal Tests, GRC3"], loc='lower right',fontsize=14)
 
 
-for k in range(1):
+for k in range(3):
     slip=[]
     slope=[]
     for i in range(9):
         if i%1==0:
-            file=open(result_name+"_slip"+str(i)+"/results.txt","r")
+            file=open(result_name[k] + str(k+1) + "_slip" + str(i) + "/results.txt","r")
             Time=[]
             drawbar_pull=[]
             num=0
@@ -101,8 +99,7 @@ for k in range(1):
             slip.append(i/10.0)
             slope.append(atan(sumsum/numnum/(17.5*9.81))*180/math.pi)
 
-    plt.plot(slip,slope,color='orange',linestyle=line_style[k],marker='D',markersize=14,label=line_label,linewidth=3)
-
+    plt.plot(slip,slope,linestyle=line_style[k],marker=marker_s[k],markersize=14,label=line_label[k],linewidth=3)
 
                 
 plt.grid(linestyle='--')
@@ -113,7 +110,7 @@ plt.gca().add_artist(l1)
 ax1=plt.gca()
 # ax1.set_title(title_name,fontsize=14,weight='bold')
 ax1.set_xlabel('Slip',fontsize=14,weight='bold')
-ax1.set_ylabel('Traction slope (deg)',fontsize=14,weight='bold')
+ax1.set_ylabel('Slope (deg)',fontsize=14,weight='bold')
 ax1.set_xlim([-0.1,1.0])
 ax1.set_ylim([-20,60])
 ax1.tick_params(axis='both',direction='in')

@@ -32,7 +32,7 @@ using namespace chrono::fsi;
 using namespace chrono::geometry;
 
 // Your work directory
-std::string work_dir = "home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts";
+std::string work_dir = "/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts";
 
 // Physical properties of terrain particles
 double iniSpacing;
@@ -75,7 +75,7 @@ bool output = true;
 int out_fps = 1;
 
 // Output directories and settings
-std::string out_dir = work_dir + "/outputs";
+std::string out_dir = "outputs";
 
 // Enable/disable run-time visualization (if Chrono::OpenGL is available)
 bool render = true;
@@ -145,7 +145,7 @@ void CreateSolidPhase(ChSystemSMC& sysMBS, ChSystemFsi& sysFSI) {
     // Create the wheel -- always SECOND body in the system
     auto trimesh = chrono_types::make_shared<ChTriangleMeshConnected>();
     double scale_ratio = 1.0;
-    trimesh->LoadWavefrontMesh(GetChronoDataFile(wheel_obj), false, true);
+    trimesh->LoadWavefrontMesh(wheel_obj, false, true);
     trimesh->Transform(ChVector<>(0, 0, 0), ChMatrix33<>(scale_ratio));  // scale to a different size
     trimesh->RepairDuplicateVertexes(1e-9);                              // if meshes are not watertight
 
@@ -281,7 +281,7 @@ int main(int argc, char* argv[]) {
         if (std::stoi(argv[5]) == 1){
             inputJson = inputJson + "/Earth";
             out_dir = out_dir + "/Earth";
-        } else if (std::stoi(argv[5]) == 3){
+        } else if (std::stoi(argv[5]) == 2){
             inputJson = inputJson + "/Moon";
             out_dir = out_dir + "/Moon";
         }
@@ -295,7 +295,7 @@ int main(int argc, char* argv[]) {
             inputJson = inputJson + "/3.json";
             out_dir = out_dir + "/soil3_";
         }
-        out_dir = out_dir + "slip_" + std::to_string(std::stoi(argv[3])) + "/";
+        out_dir = out_dir + "slip" + std::to_string(std::stoi(argv[3])) + "/";
     } else if (argc != 7) {
         std::cout << "usage: ./demo_FSI_SingleWheelTest_VV_mode <total_mass> <wheel_slip>" << std::endl;
         std::cout << "or to use default input parameters ./demo_FSI_SingleWheelTest_VV_mode " << std::endl;
@@ -392,7 +392,7 @@ int main(int argc, char* argv[]) {
 
     // Save wheel mesh
     ChTriangleMeshConnected wheel_mesh;
-    wheel_mesh.LoadWavefrontMesh(GetChronoDataFile(wheel_obj), false, true);
+    wheel_mesh.LoadWavefrontMesh(wheel_obj, false, true);
     wheel_mesh.RepairDuplicateVertexes(1e-9);
 
     // Write the information into a txt file

@@ -26,6 +26,9 @@ using namespace chrono::fsi;
 using namespace chrono::geometry;
 using namespace chrono::viper;
 
+// Your work directory
+std::string work_dir = "/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts";
+
 // Physical properties of terrain particles
 double iniSpacing;
 double kernelLength;
@@ -33,8 +36,8 @@ double density;
 double slope_angle;
 double total_mass;
 
-// output directories and settings
-std::string out_dir = "/root/sbel/outputs/FSI_Viper_RealSlope_SlopeAngle_";
+// Output directories and settings
+std::string out_dir = "outputs";
 
 // Dimension of the space domain
 double bxDim = 6.0;
@@ -60,7 +63,7 @@ float render_fps = 1;
 ViperWheelType wheel_type = ViperWheelType::RealWheel;
 
 // Use below mesh file if the wheel type is real VIPER wheel
-std::string wheel_obj = "robot/viper/obj/viper_wheel.obj";
+std::string wheel_obj = work_dir + "/obj/viper_wheel.obj";
 
 // wheel specifics
 double wheel_radius = 0.25;
@@ -123,13 +126,39 @@ int main(int argc, char* argv[]) {
     ChSystemFsi sysFSI(&sysMBS);
 
     // Use JSON file to set the FSI parameters
-    std::string inputJson = "/root/sbel/json/demo_ROBOT_Viper_RealSlope.json";
-    if (argc == 4) {
+    std::string inputJson = work_dir + "/json";
+    if (argc == 7) {
         total_mass = std::stod(argv[1]);
         slope_angle = std::stod(argv[2]) / 180.0 * CH_C_PI;
         wheel_AngVel = std::stod(argv[3]);
-        out_dir = out_dir + std::to_string(std::stoi(argv[2])) + "/";
-    } else if (argc != 4) {
+
+        if (std::stoi(argv[4]) == 1){
+            inputJson = inputJson + "/GRC1";
+            out_dir = out_dir + "/GRC1";
+        } else if (std::stoi(argv[4]) == 3){
+            inputJson = inputJson + "/GRC3";
+            out_dir = out_dir + "/GRC3";
+        }
+        if (std::stoi(argv[5]) == 1){
+            inputJson = inputJson + "/Earth";
+            out_dir = out_dir + "/Earth";
+        } else if (std::stoi(argv[5]) == 2){
+            inputJson = inputJson + "/Moon";
+            out_dir = out_dir + "/Moon";
+        }
+        out_dir = out_dir + "/omega" + argv[3];
+        if (std::stoi(argv[6]) == 1){
+            inputJson = inputJson + "/1.json";
+            out_dir = out_dir + "/soil1_";
+        } else if (std::stoi(argv[6]) == 2){
+            inputJson = inputJson + "/2.json";
+            out_dir = out_dir + "/soil2_";
+        } else if (std::stoi(argv[6]) == 3){
+            inputJson = inputJson + "/3.json";
+            out_dir = out_dir + "/soil3_";
+        }
+        out_dir = out_dir + "slope" + std::to_string(std::stoi(argv[2])) + "deg/";
+    } else if (argc != 7) {
         std::cout << "usage: ./demo_ROBOT_Viper_RealSlope <total_mass> <slope_angle> <wheel_angVel>" << std::endl;
         return 1;
     }
