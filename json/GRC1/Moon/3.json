@@ -21,7 +21,7 @@
 
   "Elastic SPH": {
     "Young modulus": 1.0e6,
-    "Artificial viscosity alpha": 0.5,
+    "Artificial viscosity alpha": 0.2,
     "mu_s": 0.793, // 38.4deg
     "mu_2": 0.793
   },
