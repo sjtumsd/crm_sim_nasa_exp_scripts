@@ -8,20 +8,20 @@ line_style=['--','-.',':',':','--','-.','-',':','--','-.','-',':']
 marker_s=['o','D','s','^','v','p','D','p','1','<','>','d']
 line_color=['b','g','c','c','m','y','k','b','g','r','c','m']
 
-result_name=["outputs/GRC1/Earth/omega0.8/soil", 
-             "outputs/GRC1/Earth/omega0.8/soil", 
-             "outputs/GRC1/Earth/omega0.8/soil", 
-             "outputs/GRC1/Moon/omega0.33/soil", 
-             "outputs/GRC1/Moon/omega0.33/soil", 
-             "outputs/GRC1/Moon/omega0.33/soil"]
-line_label=[r'Earth, $\varphi=33.4,\rho=1660$', 
-            r'Earth, $\varphi=37.2,\rho=1730$', 
-            r'Earth, $\varphi=38.4,\rho=1760$',
-            r'Moon, $\varphi=33.4,\rho=1660$', 
-            r'Moon, $\varphi=37.2,\rho=1730$', 
-            r'Moon, $\varphi=38.4,\rho=1760$']
+line_label=[r'$\omega=0.8, \varphi=33.4,\rho=1660$', 
+            r'$\omega=0.8, \varphi=37.2,\rho=1730$', 
+            r'$\omega=0.8, \varphi=38.4,\rho=1760$',
+            r'$\omega=0.33, \varphi=33.4,\rho=1660$', 
+            r'$\omega=0.33, \varphi=37.2,\rho=1730$', 
+            r'$\omega=0.33, \varphi=38.4,\rho=1760$']
+result_name=["outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
+             "outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
+             "outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
+             "outputs/GRC1/Moon_sameDamp/omega0.33/soil", 
+             "outputs/GRC1/Moon_sameDamp/omega0.33/soil", 
+             "outputs/GRC1/Moon_sameDamp/omega0.33/soil"]
 title_name="Single Wheel Simulation, m=22(kg), GRC1"
-fig_name="Viper_88kg_GRC1_Actual_Slope_Earth_Moon_Comparison.png"
+fig_name="Single_Wheel_22kg_GRC1_Actual_Slope_Moon_Omega_Comparison.png"
 
 plt.figure(figsize = [10, 6])
 font = {'weight': 'bold', 'size': 14}
@@ -74,19 +74,21 @@ l1=plt.legend([p2,p3],["MGRU3 2021 SLOPElab Tests, GRC1","MGRU3 2022 SLOPElab Te
     loc='lower right',fontsize=14)
 # l1=plt.legend([p1],["TREC Nominal Tests, GRC3"], loc='lower right',fontsize=12)
 
-# our results
 angW = [0.8, 0.8, 0.8, 0.33, 0.33, 0.33]
+i_range = [7,7,7,7,7,7]
 for n in range(2):
     for k in range(3):
         slip=[]
         slope=[]
-        for i in range(7):
-            file=open(result_name[3*n+k] + str(k+1) + "_slope" + str(i*5) + "deg" + "/body_position.txt","r")
+        for i in range(i_range[3*n+k]):
+            file=open(result_name[3*n+k] + str(k+1) + "_slope" + str(i*5) + "deg" + "/results.txt","r")
             Time=[]
             vel=[]
             num=0
             for line in file:
-                result=list(map(float, line.split()))
+                result=list(map(float, line.split("\t")))
+                if len(result)<14:
+                    break
                 
                 Time.append(result[0])
                 x=result[4]
@@ -101,14 +103,14 @@ for n in range(2):
                 sumsum+=vel[j]
                 numnum+=1
 
-            slope.append(i*5.0)
             slip.append(1 - sumsum/numnum/angW[3*n+k]/0.25)
+            slope.append(i*5.0)
 
         plt.plot(slip,slope,linestyle=line_style[3*n+k],marker=marker_s[3*n+k],markersize=14,label=line_label[3*n+k],linewidth=3)
-
+                
 plt.grid(linestyle='--')
 l2=plt.legend(loc='upper left',fontsize=14,ncol=2)
-
+                
 plt.gca().add_artist(l1)
 
 ax1=plt.gca()

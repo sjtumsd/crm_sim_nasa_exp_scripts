@@ -82,10 +82,6 @@ for n in range(2):
         slope=[]
         for i in range(i_range[3*n+k]):
             file=open(result_name[3*n+k] + str(k+1) + "_slope" + str(i*5) + "deg" + "/results.txt","r")
-            # if i < 7:
-            #     file=open(result_name[k]+"/angle_"+str(i*5)+"/results.txt","r")
-            # else:
-            #     file=open(result_name[k]+"/angle_"+str((i-7)*2 + 32)+"/results.txt","r")
             Time=[]
             vel=[]
             num=0
