@@ -93,3 +93,18 @@ Run the simulation:
 ```./runSimulation.sh```
 
 ```./runSimulationConclusion.sh```
+
+## Step 5 - Generate all images in the paper
+Go to below directory:
+
+```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\images\```
+
+Generate all images by running below script:
+
+```sudo chmod +x generateFigures.sh```
+
+```./generateFigures.sh```
+
+All the images will be in:
+
+```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\images\figure\```
