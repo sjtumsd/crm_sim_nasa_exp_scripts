@@ -14,12 +14,12 @@ line_label=[r'$\omega=0.8, \varphi=33.4,\rho=1660$',
             r'$\omega=0.33, \varphi=33.4,\rho=1660$', 
             r'$\omega=0.33, \varphi=37.2,\rho=1730$', 
             r'$\omega=0.33, \varphi=38.4,\rho=1760$']
-result_name=["outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
-             "outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
-             "outputs/GRC1/Moon_sameDamp/omega0.8/soil", 
-             "outputs/GRC1/Moon_sameDamp/omega0.33/soil", 
-             "outputs/GRC1/Moon_sameDamp/omega0.33/soil", 
-             "outputs/GRC1/Moon_sameDamp/omega0.33/soil"]
+result_name=["outputs/GRC1/Moon/omega0.8/soil", 
+             "outputs/GRC1/Moon/omega0.8/soil", 
+             "outputs/GRC1/Moon/omega0.8/soil", 
+             "outputs/GRC1/Moon/omega0.33/soil", 
+             "outputs/GRC1/Moon/omega0.33/soil", 
+             "outputs/GRC1/Moon/omega0.33/soil"]
 title_name="Single Wheel Simulation, m=22(kg), GRC1"
 fig_name="Single_Wheel_22kg_GRC1_Actual_Slope_Moon_Omega_Comparison.png"
 
