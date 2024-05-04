@@ -88,4 +88,8 @@ Run the simulation:
 
 ```sudo chmod +x runSimulation.sh```
 
+```sudo chmod +x runSimulationConclusion.sh```
+
 ```./runSimulation.sh```
+
+```./runSimulationConclusion.sh```
