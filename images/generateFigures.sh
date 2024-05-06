@@ -19,9 +19,9 @@ python3 figure11c.py
 python3 figure11d.py
 python3 figure13.py
 
-../blender/blender-2.91.0-linux64/blender --background --python ./figure12a.py 19
-../blender/blender-2.91.0-linux64/blender --background --python ./figure12b.py 19
-../blender/blender-2.91.0-linux64/blender --background --python ./figure12c.py 19
-../blender/blender-2.91.0-linux64/blender --background --python ./figure12d.py 19
+../blender/blender-3.3.1-linux64/blender --background --python ./figure12a.py 19
+../blender/blender-3.3.1-linux64/blender --background --python ./figure12b.py 19
+../blender/blender-3.3.1-linux64/blender --background --python ./figure12c.py 19
+../blender/blender-3.3.1-linux64/blender --background --python ./figure12d.py 19
 
 echo "Finished generating figures"

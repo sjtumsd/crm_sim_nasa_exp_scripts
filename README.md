@@ -97,6 +97,17 @@ Run the simulation:
 ## Step 5 - Generate all images in the paper
 Go to below directory:
 
+```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\blender\```
+
+Download Blender package
+
+```wget https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz```
+
+```tar -xvf blender-3.3.1-linux-x64.tar.xz```
+
+
+Go to below directory:
+
 ```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\images\```
 
 Generate all images by running below script:
