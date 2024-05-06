@@ -32,7 +32,7 @@ using namespace chrono::fsi;
 using namespace chrono::geometry;
 
 // Your work directory
-std::string work_dir = "/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts";
+std::string work_dir = "../..";
 
 // Physical properties of terrain particles
 double iniSpacing;
