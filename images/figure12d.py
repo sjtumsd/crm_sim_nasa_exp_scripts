@@ -18,9 +18,9 @@ res_x = 1920
 res_y = 1080
 
 #============ specify the directory of csv, obj, image, and such
-data_sim = "./"
-file_obj = "./obj_for_render/"
-image_dir = "./"
+data_sim = "../demos/viper_real_slope/outputs/GRC3/Earth/omega0.8/soil2_slope30deg/"
+file_obj = "../obj/"
+image_dir = "figure/figure12d"
 
 #============ find the position that the camera points at
 def point_at(obj, target, roll=0):
@@ -121,28 +121,28 @@ for i in range(start_frame, end_frame, 1):
                     obj_name_spe = "viper_chassis." + str(n_r).zfill(3)
             if n==1:
                 # continue
-                obj_name = "viper_wheel"
-                obj_name_spe = "viper_wheel"
+                obj_name = "nasa_viper_wheel"
+                obj_name_spe = "nasa_viper_wheel"
                 if n_r > 0:
-                    obj_name_spe = "viper_wheel." + str(4 * n_r).zfill(3)
+                    obj_name_spe = "nasa_viper_wheel." + str(4 * n_r).zfill(3)
             if n==5:
                 # continue
-                obj_name = "viper_wheel"
-                obj_name_spe = "viper_wheel." + str(1).zfill(3)
+                obj_name = "nasa_viper_wheel"
+                obj_name_spe = "nasa_viper_wheel." + str(1).zfill(3)
                 if n_r > 0:
-                    obj_name_spe = "viper_wheel." + str(4 * n_r + 1).zfill(3)
+                    obj_name_spe = "nasa_viper_wheel." + str(4 * n_r + 1).zfill(3)
             if n==9:
                 # continue
-                obj_name = "viper_wheel"
-                obj_name_spe = "viper_wheel." + str(2).zfill(3)
+                obj_name = "nasa_viper_wheel"
+                obj_name_spe = "nasa_viper_wheel." + str(2).zfill(3)
                 if n_r > 0:
-                    obj_name_spe = "viper_wheel." + str(4 * n_r + 2).zfill(3)
+                    obj_name_spe = "nasa_viper_wheel." + str(4 * n_r + 2).zfill(3)
             if n==13:
                 # continue
-                obj_name = "viper_wheel"
-                obj_name_spe = "viper_wheel." + str(3).zfill(3)
+                obj_name = "nasa_viper_wheel"
+                obj_name_spe = "nasa_viper_wheel." + str(3).zfill(3)
                 if n_r > 0:
-                    obj_name_spe = "viper_wheel." + str(4 * n_r + 3).zfill(3)
+                    obj_name_spe = "nasa_viper_wheel." + str(4 * n_r + 3).zfill(3)
             if n==4:
                 obj_name = "viper_L_steer"
                 obj_name_spe = "viper_L_steer"
@@ -304,10 +304,10 @@ for i in range(start_frame, end_frame, 1):
     # add rotational angle by 1
     ini_rad = 135
     cur_rad = ini_rad #+ i * 0.5
-    # cam.location = rot_pos((dis[0][i][0],dis[0][i][1],dis[0][i][2]+4),10,cur_rad)
-    cam.location = rot_pos((0,0,4),8.5,cur_rad)
-    # point_at(cam, (dis[0][i][0],dis[0][i][1],dis[0][i][2]+0.5), roll=math.radians(0))
-    point_at(cam, (0,0,0.5), roll=math.radians(0))
+    cam.location = rot_pos((dis[0][i][0],dis[0][i][1],dis[0][i][2]+4),8.5,cur_rad)
+    # cam.location = rot_pos((0,0,4),8.5,cur_rad)
+    point_at(cam, (dis[0][i][0],dis[0][i][1],dis[0][i][2]+0.5), roll=math.radians(0))
+    # point_at(cam, (0,0,0.5), roll=math.radians(0))
 
     scene.cycles.device = 'GPU'
 
@@ -357,7 +357,8 @@ for i in range(start_frame, end_frame, 1):
     bpy.context.scene.cycles.samples = 256
     bpy.context.scene.render.resolution_x = res_x
     bpy.context.scene.render.resolution_y = res_y
-    bpy.context.scene.render.filepath = image_dir + str(i) + ".png"
+    # bpy.context.scene.render.filepath = image_dir + str(i) + ".png"
+    bpy.context.scene.render.filepath = image_dir + ".png"
     #bpy.context.scene.render.image_settings.compression = 50
     bpy.context.scene.render.image_settings.color_mode = 'RGBA'
     bpy.context.scene.render.image_settings.file_format = 'PNG'
