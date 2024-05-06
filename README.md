@@ -9,7 +9,7 @@ These simulations took 3-4 days on a workstation with Intel 14900K CPU and NVIDI
 ## Step 1 - Clone Chrono and scripts for the paper, then build Chrono software
 Create a work directory in your home directory like below: 
 
-```~/00_CRM_NASA_SIM/```
+```~/00_CRM_NASA_SIM```
 
 Go to this work directory, clone the Chrono repository and checkout to release 8.0 version: 
 
@@ -37,7 +37,7 @@ Build Chrono in this directory with ```FSI MODULE``` ON, ```VEHICLE MODULE``` ON
 ## Step 2 - Build and run the single wheel simulation with VV-mode
 Go to the single wheel VV-mode scripts folder: 
 
-```cd crm_sim_nasa_exp_scripts/demos/single_wheel_vv_mode```
+```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/demos/single_wheel_vv_mode```
 
 Configure the single wheel simulation: 
 
@@ -57,7 +57,7 @@ Run the simulation:
 ## Step 3 - Build and run the single wheel simulation with Real slope-mode
 Go to the single wheel Real slope-mode scripts folder:
 
-```cd crm_sim_nasa_exp_scripts/demos/single_wheel_real_slope_mode```
+```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/demos/single_wheel_real_slope_mode```
 
 Configure the single wheel simulation: 
 
@@ -76,7 +76,7 @@ Run the simulation:
 ## Step 4 - Build and run the full Viper rover simulation
 Go to the full Viper rover scripts folder 
 
-```cd crm_sim_nasa_exp_scripts/demos/viper_real_slope```
+```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/demos/viper_real_slope```
 
 Configure the full Viper rover simulation 
 
@@ -99,7 +99,7 @@ Run the simulation:
 ## Step 5 - Generate all images in the paper
 Go to below directory:
 
-```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/```
+```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts```
 
 Download Blender package
 
@@ -110,7 +110,7 @@ Download Blender package
 
 Go to below directory:
 
-```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/images/```
+```~/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts/images```
 
 Generate all images by running below script:
 
