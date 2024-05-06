@@ -99,7 +99,7 @@ Run the simulation:
 ## Step 5 - Generate all images in the paper
 Go to below directory:
 
-```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\blender\```
+```/home/weihu/research/00_CRM_NASA_SIM/crm_sim_nasa_exp_scripts\```
 
 Download Blender package
 
